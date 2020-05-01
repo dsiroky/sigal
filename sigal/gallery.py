@@ -364,8 +364,10 @@ class Album(UnicodeMixin):
             else:
                 key = lambda s: strxfrm(getattr(s, medias_sort_attr))
 
-            self.medias.sort(key=key,
-                             reverse=self.settings['medias_sort_reverse'])
+            reverse = self.settings['medias_sort_reverse']
+            if "medias_sort_reverse" in self.meta:
+                reverse = True if self.meta['medias_sort_reverse'][0] == "True" else False
+            self.medias.sort(key=key, reverse=reverse)
 
         signals.medias_sorted.send(self)
 
