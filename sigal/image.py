@@ -212,10 +212,6 @@ def get_exif_data(filename):
 
     logger = logging.getLogger(__name__)
 
-    if PIL.PILLOW_VERSION == '3.0.0':
-        warnings.warn('Pillow 3.0.0 is broken with EXIF data, consider using '
-                      'another version if you want to use EXIF data.')
-
     img = _read_image(filename)
 
     try:
